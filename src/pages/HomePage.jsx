@@ -30,22 +30,24 @@ const HomePage = () => {
   };
 
   return (
-    <div className="container">
-      <h1>Impostor Word Game</h1>
-      <input
-        placeholder="Your Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      
-      <hr />
-      <input
-        placeholder="Room Code"
-        value={roomCode}
-        onChange={(e) => setRoomCode(e.target.value)}
-      />
-      <button onClick={handleCreateRoom}>Create Room</button>
-      <button onClick={handleJoinRoom}>Join Room</button>
+    <div className="main-container">
+      <div className="container">
+        <h1>Impostor Word Game</h1>
+        <input
+          placeholder="Your Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+
+        <hr />
+        <input
+          placeholder="Room Code"
+          value={roomCode}
+          onChange={(e) => setRoomCode(e.target.value)}
+        />
+        <button onClick={handleCreateRoom}>Create Room</button>
+        <button onClick={handleJoinRoom}>Join Room</button>
+      </div>
     </div>
   );
 };

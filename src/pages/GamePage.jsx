@@ -72,32 +72,34 @@ const GamePage = () => {
           </button>
         </div>
       )}
-      <div
-        className="container"
-        style={{ position: "relative", paddingTop: "50px" }}
-      >
-        {showCountdown ? (
-          <Countdown onComplete={() => setShowCountdown(false)} />
-        ) : (
-          <>
-            <h2>Your word is:</h2>
-            <h1>{word}</h1>
+      <div className="main-container">
+        <div
+          className="container"
+          style={{ position: "relative", paddingTop: "50px" }}
+        >
+          {showCountdown ? (
+            <Countdown onComplete={() => setShowCountdown(false)} />
+          ) : (
+            <>
+              <h2>Your word is:</h2>
+              <h1>{word}</h1>
 
-            {playerId === host && (
-              <button
-                style={{
-                  marginTop: "20px",
-                  padding: "10px 20px",
-                  fontSize: "1rem",
-                  cursor: "pointer",
-                }}
-                onClick={handleRestart}
-              >
-                Restart Game
-              </button>
-            )}
-          </>
-        )}
+              {playerId === host && (
+                <button
+                  style={{
+                    marginTop: "20px",
+                    padding: "10px 20px",
+                    fontSize: "1rem",
+                    cursor: "pointer",
+                  }}
+                  onClick={handleRestart}
+                >
+                  Restart Game
+                </button>
+              )}
+            </>
+          )}
+        </div>
       </div>
     </>
   );

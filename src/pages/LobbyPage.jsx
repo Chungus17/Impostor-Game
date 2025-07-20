@@ -32,17 +32,19 @@ const LobbyPage = () => {
   };
 
   return (
-    <div className="container">
-      <h2>Room: {roomCode}</h2>
-      <h3>Players:</h3>
-      <ul>
-        {Object.values(players).map((player, i) => (
-          <li key={i}>{player.name}</li>
-        ))}
-      </ul>
-      {state.playerId === host && (
-        <button onClick={handleStartGame}>Start Game</button>
-      )}
+    <div className="main-container">
+      <div className="container">
+        <h2>Room: {roomCode}</h2>
+        <h3>Players:</h3>
+        <ul>
+          {Object.values(players).map((player, i) => (
+            <li key={i}>{player.name}</li>
+          ))}
+        </ul>
+        {state.playerId === host && (
+          <button onClick={handleStartGame}>Start Game</button>
+        )}
+      </div>
     </div>
   );
 };

@@ -13,7 +13,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 10px 20px;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;  /* horizontal centering */
+  align-items: center;      /* vertical centering */
+  height: 100vh;            /* full screen height */
 }
 
 /* Container for each page */
