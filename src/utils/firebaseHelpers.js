@@ -1,5 +1,103 @@
 import { db } from "../firebase";
 
+const wordList = [
+  // Places
+  "Airport",
+  "Library",
+  "Beach",
+  "Hospital",
+  "Restaurant",
+  "Jungle",
+  "Cave",
+  "Cinema",
+  "Bakery",
+  "Stadium",
+  "Farm",
+  "Hotel",
+  "Museum",
+  "Park",
+  "Desert",
+  "Factory",
+  "Theater",
+  "Supermarket",
+  "Garage",
+  "Mountain",
+  "Aquarium",
+  "Subway",
+  "Castle",
+  "Circus",
+  "Campsite",
+  "Mall",
+  "Space Station",
+  "Amusement Park",
+  "Haunted House",
+
+  // Objects
+  "Toothbrush",
+  "Laptop",
+  "Backpack",
+  "Telephone",
+  "Sunglasses",
+  "Telescope",
+  "Pillow",
+  "Clock",
+  "Microwave",
+  "Broom",
+  "Helmet",
+  "Key",
+  "Wallet",
+  "Mirror",
+  "Shoes",
+  "Towel",
+  "Remote",
+  "Headphones",
+  "Spoon",
+  "Camera",
+
+  // Events
+  "Birthday Party",
+  "Wedding",
+  "Graduation",
+  "Concert",
+  "Picnic",
+  "Job Interview",
+  "Funeral",
+  "Sport Match",
+  "First Date",
+  "Baby Shower",
+  "Fire Drill",
+
+  // Roles
+  "Doctor",
+  "Teacher",
+  "Chef",
+  "Pilot",
+  "Artist",
+  "Farmer",
+  "Police Officer",
+  "Astronaut",
+  "Actor",
+  "Magician",
+  "Nurse",
+  "Scientist",
+  "Waiter",
+
+  // Activities
+  "Swimming",
+  "Cooking",
+  "Painting",
+  "Dancing",
+  "Singing",
+  "Studying",
+  "Hiking",
+  "Sleeping",
+  "Gaming",
+  "Fishing",
+  "Shopping",
+  "Reading",
+  "Writing",
+];
+
 // Create a new room
 export const createRoom = async (playerId, name) => {
   const roomCode = Math.floor(100000 + Math.random() * 900000).toString();
@@ -23,7 +121,6 @@ export const joinRoom = async (roomCode, playerId, name) => {
 export const startGame = async (roomCode) => {
   const snap = await db.ref(`rooms/${roomCode}/players`).get();
   const players = Object.keys(snap.val());
-  const wordList = ["Zoo", "Library", "Airport", "Beach"];
   const secretWord = wordList[Math.floor(Math.random() * wordList.length)];
   const impostor = players[Math.floor(Math.random() * players.length)];
   await db.ref(`rooms/${roomCode}`).update({
@@ -31,9 +128,6 @@ export const startGame = async (roomCode) => {
     impostor,
   });
 };
-
-// Sample words list
-const words = ["Zoo", "Library", "Airport", "Beach"];
 
 export const restartGame = async (roomCode) => {
   const roomRef = db.ref(`rooms/${roomCode}`);
@@ -44,16 +138,16 @@ export const restartGame = async (roomCode) => {
 
   const playerIds = Object.keys(roomData.players);
   const newImpostor = playerIds[Math.floor(Math.random() * playerIds.length)];
-  const newWord = words[Math.floor(Math.random() * words.length)];
+  const newWord = wordList[Math.floor(Math.random() * wordList.length)];
 
   await roomRef.update({
     impostor: newImpostor,
     word: newWord,
-    countdown: 3, // trigger the countdown on all clients
+    countdown: 3,
   });
 };
 
 export const leaveRoom = async (roomCode) => {
   const roomRef = db.ref(`rooms/${roomCode}`);
-  await roomRef.remove();  // Deletes the entire room from Firebase
+  await roomRef.remove(); // Deletes the entire room from Firebase
 };
