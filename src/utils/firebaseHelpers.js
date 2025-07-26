@@ -5,54 +5,39 @@ const wordList = [
   "Airport",
   "Library",
   "Beach",
-  "Hospital",
-  "Restaurant",
   "Jungle",
   "Cave",
   "Cinema",
-  "Bakery",
   "Stadium",
-  "Farm",
   "Hotel",
   "Museum",
-  "Park",
-  "Desert",
   "Factory",
   "Theater",
-  "Supermarket",
   "Garage",
-  "Mountain",
-  "Aquarium",
-  "Subway",
   "Castle",
   "Circus",
-  "Campsite",
   "Mall",
-  "Space Station",
-  "Amusement Park",
-  "Haunted House",
+  "Zoo",
 
   // Objects
   "Toothbrush",
   "Laptop",
-  "Backpack",
   "Telephone",
-  "Sunglasses",
   "Telescope",
   "Pillow",
   "Clock",
-  "Microwave",
+  "Knife",
   "Broom",
   "Helmet",
   "Key",
   "Wallet",
   "Mirror",
   "Shoes",
-  "Towel",
   "Remote",
   "Headphones",
   "Spoon",
   "Camera",
+  "Washing Machine",
 
   // Events
   "Birthday Party",
@@ -62,10 +47,8 @@ const wordList = [
   "Picnic",
   "Job Interview",
   "Funeral",
-  "Sport Match",
   "First Date",
   "Baby Shower",
-  "Fire Drill",
 
   // Roles
   "Doctor",
@@ -86,7 +69,6 @@ const wordList = [
   "Swimming",
   "Cooking",
   "Painting",
-  "Dancing",
   "Singing",
   "Studying",
   "Hiking",
@@ -94,8 +76,36 @@ const wordList = [
   "Gaming",
   "Fishing",
   "Shopping",
-  "Reading",
   "Writing",
+
+  // Random words
+  "Egypt",
+  "Harry Potter",
+  "Magnet",
+  "Deodorant",
+  "Michael Jackson",
+  "Ateeq Rana",
+  "Gays",
+  "Dajjal",
+  "Game Of Thrones",
+  "Red Bull",
+  "Buddha",
+  "Bitcoin",
+  "Social Media",
+  "Among Us",
+  "Rapist",
+  "Pokemon",
+  "Pharoah",
+  "Mr. Bean",
+  "TikTok",
+  "Naruto",
+  "Rick and Morty",
+  "Minions",
+  "Barbie",
+  "UFO",
+  "Kim Kardashian",
+  "Spider-Man",
+  "Squid Game",
 ];
 
 // Create a new room
@@ -123,9 +133,11 @@ export const startGame = async (roomCode) => {
   const players = Object.keys(snap.val());
   const secretWord = wordList[Math.floor(Math.random() * wordList.length)];
   const impostor = players[Math.floor(Math.random() * players.length)];
+  const starter = players[Math.floor(Math.random() * players.length)]; // 👈 New
   await db.ref(`rooms/${roomCode}`).update({
     word: secretWord,
     impostor,
+    starter,
   });
 };
 
@@ -138,11 +150,13 @@ export const restartGame = async (roomCode) => {
 
   const playerIds = Object.keys(roomData.players);
   const newImpostor = playerIds[Math.floor(Math.random() * playerIds.length)];
+  const newStarter = playerIds[Math.floor(Math.random() * playerIds.length)];
   const newWord = wordList[Math.floor(Math.random() * wordList.length)];
 
   await roomRef.update({
     impostor: newImpostor,
     word: newWord,
+    starter: newStarter,
     countdown: 3,
   });
 };

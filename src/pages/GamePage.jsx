@@ -14,6 +14,7 @@ const GamePage = () => {
   const [word, setWord] = useState("");
   const [host, setHost] = useState(null);
   const [showCountdown, setShowCountdown] = useState(true);
+  const [starter, setStarter] = useState(null);
 
   useEffect(() => {
     const ref = db.ref(`rooms/${roomCode}`);
@@ -32,6 +33,10 @@ const GamePage = () => {
       }
 
       if (data?.host) setHost(data.host);
+
+      if (data?.starter) {
+        setStarter(data.starter);
+      }
 
       if (data?.countdown && data.countdown > 0) {
         setShowCountdown(true);
@@ -83,6 +88,20 @@ const GamePage = () => {
             <>
               <h2>Your word is:</h2>
               <h1>{word}</h1>
+
+              {playerId === starter && (
+                <p
+                  style={{
+                    marginTop: "10px",
+                    fontWeight: "bold",
+                    fontSize: "1.8rem",
+                    color: "#0e227cff",
+                    textAlign: "center",
+                  }}
+                >
+                  Start Nigger
+                </p>
+              )}
 
               {playerId === host && (
                 <button

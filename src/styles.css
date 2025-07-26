@@ -89,10 +89,14 @@ li {
 
 /* Game word */
 h1 {
-  font-size: 48px;
+  font-size: 28px;
   letter-spacing: 2px;
   text-transform: uppercase;
   user-select: none;
+  word-wrap: break-word;     /* Break long words */
+  overflow-wrap: break-word; /* Break at word boundaries */
+  text-align: center;
+  max-width: 100%;
 }
 
 /* in App.css or GamePage.module.css */
