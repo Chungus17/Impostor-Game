@@ -1,112 +1,91 @@
 import { db } from "../firebase";
 
 const wordList = [
-  // Places
-  "Airport",
-  "Library",
-  "Beach",
-  "Jungle",
-  "Cave",
-  "Cinema",
-  "Stadium",
-  "Hotel",
-  "Museum",
-  "Factory",
-  "Theater",
-  "Garage",
-  "Castle",
-  "Circus",
-  "Mall",
-  "Zoo",
-
-  // Objects
-  "Toothbrush",
-  "Laptop",
-  "Telephone",
-  "Telescope",
-  "Pillow",
-  "Clock",
-  "Knife",
-  "Broom",
-  "Helmet",
-  "Key",
-  "Wallet",
-  "Mirror",
-  "Shoes",
-  "Remote",
-  "Headphones",
-  "Spoon",
-  "Camera",
-  "Washing Machine",
-
-  // Events
-  "Birthday Party",
-  "Wedding",
-  "Graduation",
-  "Concert",
-  "Picnic",
-  "Job Interview",
-  "Funeral",
-  "First Date",
-  "Baby Shower",
-
-  // Roles
-  "Doctor",
-  "Teacher",
-  "Chef",
-  "Pilot",
-  "Artist",
-  "Farmer",
-  "Police Officer",
-  "Astronaut",
-  "Actor",
-  "Magician",
-  "Nurse",
-  "Scientist",
-  "Waiter",
-
-  // Activities
-  "Swimming",
-  "Cooking",
-  "Painting",
-  "Singing",
-  "Studying",
-  "Hiking",
-  "Sleeping",
-  "Gaming",
-  "Fishing",
-  "Shopping",
-  "Writing",
-
-  // Random words
-  "Egypt",
-  "Harry Potter",
-  "Magnet",
-  "Deodorant",
-  "Michael Jackson",
-  "Ateeq Rana",
-  "Gays",
-  "Dajjal",
-  "Game Of Thrones",
-  "Red Bull",
-  "Buddha",
-  "Bitcoin",
-  "Social Media",
-  "Among Us",
-  "Rapist",
-  "Pokemon",
-  "Pharoah",
-  "Mr. Bean",
-  "TikTok",
-  "Naruto",
-  "Rick and Morty",
-  "Minions",
+  // Movies / Shows
+  "Titanic",
+  "Avatar",
+  "Frozen",
+  "Batman",
+  "Inception",
   "Barbie",
-  "UFO",
-  "Kim Kardashian",
-  "Spider-Man",
-  "Squid Game",
+  "Jaws",
+  "Shrek",
+  "Gladiator",
+  "Aladdin",
+  "Godzilla",
+  "Twilight",
+
+  // Animals
+  "Elephant",
+  "Penguin",
+  "Giraffe",
+  "Crocodile",
+  "Octopus",
+  "Whale",
+  "Zebra",
+  "Turtle",
+  "Camel",
+  "Monkey",
+
+  // Famous People (first name or last name only)
+  "Einstein",
+  "Messi",
+  "Obama",
+  "Drake",
+  "Tesla",
+  "Newton",
+  "Ronaldo",
+  "Cleopatra",
+  "Napoleon",
+  "Gandhi",
+  "Shakespeare",
+
+  // Ancient / Historical / Mythology
+  "Pharaoh",
+  "Pyramid",
+  "Gladius",
+  "Viking",
+  "Samurai",
+  "Mummy",
+
+  // Famous Foods / Dishes
+  "Donut",
+  "Curry",
+  "Falafel",
+  "Biryani",
+  "Kebab",
+  "Pancake",
+  "Lasagna",
+
+  // Popular Random / Pop Culture
+  "Pokémon",
+  "iPhone",
+  "TikTok",
+  "Netflix",
+  "Lego",
+  "Minecraft",
+  "Snapchat",
+  "Mario",
+  "Minions",
+  "PlayStation",
+  "YouTube",
+  "Emoji",
+  "Google",
+  "AirPods",
+  "Fortnite",
+
+  // Extra additions
+  "Coffee",
+  "Ateeq",
+  "Gays",
+  "Dashti",
+  "Shagging",
+  "Mallu",
+  "Dragon",
+  "Game Of Thrones",
+
 ];
+
 
 // Create a new room
 export const createRoom = async (playerId, name) => {
@@ -133,7 +112,7 @@ export const startGame = async (roomCode) => {
   const players = Object.keys(snap.val());
   const secretWord = wordList[Math.floor(Math.random() * wordList.length)];
   const impostor = players[Math.floor(Math.random() * players.length)];
-  const starter = players[Math.floor(Math.random() * players.length)]; // 👈 New
+  const starter = players[Math.floor(Math.random() * players.length)]; 
   await db.ref(`rooms/${roomCode}`).update({
     word: secretWord,
     impostor,
