@@ -83,6 +83,15 @@ const wordList = [
   "Mallu",
   "Dragon",
   "Game Of Thrones",
+  "Mahde",
+  "Abbas",
+  "Yousef",
+  "Fahad",
+  "Aaron",
+  "Mishal",
+  "Vivek",
+  "Rasoul",
+  "Haroon"
 
 ];
 
